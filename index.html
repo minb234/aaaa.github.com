@@ -47,6 +47,53 @@
 				<div class="inner">
 					<header class="special">
 					<h3>오픈소스에 대한 소개 및 오픈소스의 역사를 다루는 온오프라인 매체인 홈페이지와 소책자를 통해 제공하는 사이트</h3>
+					
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : 1213344538819113,
+      cookie     : true,
+      xfbml      : true,
+      version    : v3.2
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
+
+{
+    status: 'connected',
+    authResponse: {
+        accessToken: '...',
+        expiresIn:'...',
+        signedRequest:'...',
+        userID:'...'
+    }
+}
+
+<fb:login-button 
+  scope="public_profile,email"
+  onlogin="checkLoginState();">
+</fb:login-button>
+
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}
 					</header>
 
 
