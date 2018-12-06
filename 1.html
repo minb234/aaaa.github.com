@@ -1,102 +1,97 @@
-<!DOCTYPE HTML>
-<!--
-	Industrious by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>Pamphlet</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+<head>
+<title>Facebook Login JavaScript Example</title>
+<meta charset="UTF-8">
+</head>
+<body>
+<script>
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else {
+      // The person is not logged into your app or we are unable to tell.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    }
+  }
 
-		<!-- Header -->
-			<header id="header">
-				<a class="logo" href="index.html">opensource</a>
-				<nav>
-					<a href="#menu">Menu</a>
-				</nav>
-			</header>
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
 
-		<!-- Nav -->
-			<nav id="menu">
-				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="elements.html">introduce</a></li>
-					<li><a href="generic.html">pamphlet</a></li>
-				</ul>
-			</nav>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{322160948608094}',
+      cookie     : true,  // enable cookies to allow the server to access 
+                          // the session
+      xfbml      : true,  // parse social plugins on this page
+      version    : 'v2.8' // use graph api version 2.8
+    });
 
-		<!-- Heading -->
-			<div id="heading" >
-				<h1>Pamphlet</h1>
-			</div>
+    // Now that we've initialized the JavaScript SDK, we call 
+    // FB.getLoginStatus().  This function gets the state of the
+    // person visiting this page and can return one of three states to
+    // the callback you provide.  They can be:
+    //
+    // 1. Logged into your app ('connected')
+    // 2. Logged into Facebook, but not your app ('not_authorized')
+    // 3. Not logged into Facebook and can't tell if they are logged into
+    //    your app or not.
+    //
+    // These three cases are handled in the callback function.
 
-		<!-- Main -->
-			<section id="main" class="wrapper">
-				<div class="inner">
-					<div class="content">
-						<header>
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
 
-							<h2>1. 오픈소스란 ?</h2>
-						<p><img src="https://github.com/minb234/minb234.github.com/blob/master/images/open.jpg?raw=true" width="200" height="200"><br> - 원본 코드를 자유롭게 사용할 수 있고 재배포 및 수정할 수 있는 소프트웨어를 말한다.</p>
-							</p>
-						<li><a href="elements.html">이전 페이지로</a></li>
-						</header>
-						
-					</div>
-				</div>
-			</section>
+  };
 
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<div class="content">
-						<section>
-							<h3>오픈소스 프로젝트</h3>
-							<p>
-							한양대 ERICA 오픈소스SW기초 강의 프로젝트<br>
-							오픈소스 관련 정보 사이트입니다.
-							</p>
-						</section>
-						<section>
-							<h4>E-mail</h4>
-							<ul class="alt">
-								<li><a href="#">김남호&nbsp;minb234@naver.com</a></li>
-								<li><a href="#">한동연&nbsp;handongyeon202@naver.com</a></li>
-								<li><a href="#">오형서&nbsp;ohgudtj_3@naver.com</a></li>
-								<li><a href="#">이강영&nbsp;gang7994@naver.com</a></li>
-								<li><a href="#">장윤호&nbsp;shuricherish@gmail.com</a></li>
-							</ul>
-						</section>
-						<section>
-							<h4>Github</h4>
-							<ul class="plain">
-								<li><a href="https://github.com/minb234"target="blank_"><i class="icon fa-github">&nbsp;</i>Github</a></li>
-								<li><a href="https://github.com/hhhhhhhhandongyeon"target="blank_"><i class="icon fa-github">&nbsp;</i>Github</a></li>
-								<li><a href="https://github.com/ohhyungsuh"target="blank_"><i class="icon fa-github">&nbsp;</i>Github</a></li>
-								<li><a href="https://github.com/gang7994"target="blank_"><i class="icon fa-github">&nbsp;</i>Github</a></li>
-								<li><a href="https://github.com/JangYoonHo"target="blank_"><i class="icon fa-github">&nbsp;</i>Github</a></li>
-							</ul>
-						</section>
-					</div>
-					<div class="copyright">
-						&copy; Untitled. Photos <a href="https://unsplash.co">Unsplash</a>, Video <a href="https://coverr.co">Coverr</a>.
-					</div>
-				</div>
-			</footer>
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    });
+  }
+</script>
 
-	</body>
+<!--
+  Below we include the Login Button social plugin. This button uses
+  the JavaScript SDK to present a graphical Login button that triggers
+  the FB.login() function when clicked.
+-->
+
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
+
+<div id="status">
+</div>
+
+</body>
 </html>
